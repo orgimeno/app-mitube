@@ -18,15 +18,27 @@
           <a class="nav-link" rel="noopener" [routerLink]="['index']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" rel="noopener" [routerLink]="['createVideo']">Crear Video</a>
+          <a class="nav-link" rel="noopener" [routerLink]="['createVideo']">Crear Video
+            <fa-icon
+              [icon]="faVideo"
+              [spin]="true"
+            ></fa-icon>
+          </a>
         </li>
       </ul>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" rel="noopener" [routerLink]="['register']">Register</a>
+          <a class="nav-link" rel="noopener" [routerLink]="['register']">
+            Register
+            <fa-icon [icon]="faRegistered" size="xs"></fa-icon>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" rel="noopener" [routerLink]="['login']">Login</a>
+
+          <a class="nav-link" rel="noopener" [routerLink]="['login']">
+            Login
+            <fa-icon [icon]="faUser" size="1x"></fa-icon>
+          </a>
         </li>
       </ul>
     </div>
