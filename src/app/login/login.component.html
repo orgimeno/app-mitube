@@ -7,7 +7,18 @@
       <div class="card-body">
         <h4 class="card-title">{{titulo}}</h4>
 
-        <form #loginForm="ngForm" class="form-horizontal col-6" (ngSubmit)="onSubmit($event)" >
+        <div *ngIf="identity">
+          <div class="user-identity alert alert-success" *ngIf="identity.email">
+            Bienvenido {{identity.name}}
+          </div>
+
+          <div class="user-identity alert alert-danger" *ngIf="identity.data">
+            {{identity.data}}
+          </div>
+
+        </div>
+
+        <form #loginForm="ngForm" class="form-horizontal col-6" (ngSubmit)="onSubmit()" >
           <div class="form-group">
             <label class="col-form-label mr-2" for="email">E-mail</label>
             <input #email ="ngModel" name="email" id="email" type="email" class="form-control" required [(ngModel)]="user.email" >

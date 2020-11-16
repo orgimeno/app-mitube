@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import { map } from 'rxjs/operators';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {GLOBAL} from "./global";
 
 
 @Injectable()
@@ -24,10 +25,11 @@ export class LoginService{
     console.info('*****************************************');
     console.info('/login');
     console.info(`json=${ json }`);
+    console.info(`xdebug=${ GLOBAL.xdebug }`);
     console.info('*****************************************');
 
     return this._http.post(this.url + '/login', params, {
-      // params: new HttpParams().set('XDEBUG_SESSION_START', XDEBUG),
+      params: new HttpParams().set('XDEBUG_SESSION_START', GLOBAL.xdebug),
       headers:headers,
       observe: 'response'
     })

@@ -7,6 +7,7 @@ import { DefaultComponent } from './default/default.component';
 const routes: Routes = [
   { path: 'index', component: DefaultComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:id', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: DefaultComponent }
 ];

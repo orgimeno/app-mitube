@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {faUser, faRegistered, faVideo, faIdCard, faHome, faCog, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import {LoginService} from "./services/login.service";
+import {GLOBAL} from "./services/global";
 // FAICONS DOCS ->  https://github.com/FortAwesome/angular-fontawesome/blob/d546906822d6076f3446af787e3fdbb797bf587e/docs/usage/features.md#basic-use
 
 @Component({
@@ -25,8 +26,12 @@ export class AppComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private activatedRoute: ActivatedRoute
   ) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      GLOBAL.xdebug = params['XDEBUG_SESSION_START']
+    });
   }
 
   ngOnInit(){

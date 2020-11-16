@@ -3,7 +3,6 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
       <img alt="logo" src="favicon.ico" height="40">
@@ -25,8 +24,6 @@
             ></fa-icon>
           </a>
         </li>
-        <li>{{identity | json}}</li>
-        <li>{{token | json}}</li>
       </ul>
       <ul class="nav navbar-nav mr-auto" *ngIf="identity" id="credentials-top">
         <li class="dropdown open">
@@ -49,10 +46,10 @@
                 </button>
               </li>
 
-              <li role="separator" class="divider"></li>
+              <hr/>
 
               <li>
-                <button [routerLink]="logout" class="dropdown-item">
+                <button [routerLink]="['/login']" [queryParams]="{id:1}" class="dropdown-item">
                   <fa-icon [icon]="faSignOutAlt" size="xs" class="mr-1"></fa-icon>
                   Salir
                 </button>
