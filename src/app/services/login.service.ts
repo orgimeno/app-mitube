@@ -1,0 +1,61 @@
+import {Injectable} from "@angular/core";
+import { map } from 'rxjs/operators';
+import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+
+
+@Injectable()
+export class LoginService{
+
+  public url = "http://127.0.0.1:8000/app_dev.php";
+  public identity;
+  public token;
+
+  constructor(private _http: HttpClient) {
+  }
+
+  signUp(userToLogin){
+    let json = JSON.stringify(userToLogin);
+    let params = "json="+json;
+    let headers = new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded'
+    });
+
+    console.info('*****************************************');
+    console.info('/login');
+    console.info(`json=${ json }`);
+    console.info('*****************************************');
+
+    return this._http.post(this.url + '/login', params, {
+      // params: new HttpParams().set('XDEBUG_SESSION_START', XDEBUG),
+      headers:headers,
+      observe: 'response'
+    })
+      .pipe(map((resp: any) => resp));
+  }
+
+  getIdentity(){
+    let identity = JSON.parse(localStorage.getItem('identity'));
+
+    if(identity != 'undefined'){
+      this.identity = identity;
+    }else{
+      this.identity = null;
+    }
+
+    return this.identity;
+  }
+
+  getToken(){
+    let token = localStorage.getItem('token');
+
+    if(token != 'undefined'){
+      this.token = token;
+    }else{
+      this.token = null;
+    }
+
+    return this.token;
+  }
+
+}

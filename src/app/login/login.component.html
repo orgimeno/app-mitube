@@ -1,3 +1,30 @@
-<div class="card">
-  ang
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Formaulario de Login</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">{{titulo}}</h4>
+
+        <form #loginForm="ngForm" class="form-horizontal col-6" (ngSubmit)="onSubmit($event)" >
+          <div class="form-group">
+            <label class="col-form-label mr-2" for="email">E-mail</label>
+            <input #email ="ngModel" name="email" id="email" type="email" class="form-control" required [(ngModel)]="user.email" >
+            <span class="alert-danger mt-1" *ngIf="!email.valid">El e-mail es obligatorio</span>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label mr-2" for="passwd">Contraseña</label>
+            <input #password ="ngModel" name="passwd" id="passwd" type="password" class="form-control" required [(ngModel)]="user.password" >
+            <span class="alert-danger mt-1" *ngIf="!password.valid">La contraseña es obligatoria</span>
+          </div>
+          <input type="submit" class="btn btn-info" value="Entrar">
+        </form>
+
+      </div>
+      <div class="card-footer text-muted">
+        <a>¿Ha olvidado la contraseña?</a>
+      </div>
+    </div>
+  </div>
 </div>

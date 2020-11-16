@@ -1,4 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
+  <!--The content below is only a placeholder and can be replaced.-->
 <div class="container-fluid">
   <h1>
     Welcome to {{ title }}!
@@ -13,11 +13,11 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="nav navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" rel="noopener" [routerLink]="['index']">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="identity">
           <a class="nav-link" rel="noopener" [routerLink]="['createVideo']">Crear Video
             <fa-icon
               [icon]="faVideo"
@@ -25,8 +25,45 @@
             ></fa-icon>
           </a>
         </li>
+        <li>{{identity | json}}</li>
+        <li>{{token | json}}</li>
       </ul>
-      <ul class="navbar-nav mr-auto">
+      <ul class="nav navbar-nav mr-auto" *ngIf="identity" id="credentials-top">
+        <li class="dropdown open">
+          <button href="#" class="dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false"
+          aria-haspopup="true">
+            <fa-icon [icon]="faIdCard" size="xs" class="mr-1"></fa-icon>
+            {{identity.name}} {{identity.surname}}
+            <ul class="dropdown-menu">
+              <li>
+                <button [routerLink]="index" class="dropdown-item">
+                  <fa-icon [icon]="faHome" size="xs" class="mr-1"></fa-icon>
+                  Mi Canal
+                </button>
+              </li>
+
+              <li>
+                <button [routerLink]="index" class="dropdown-item">
+                  <fa-icon [icon]="faCog" size="xs" class="mr-1"></fa-icon>
+                  Ajustes
+                </button>
+              </li>
+
+              <li role="separator" class="divider"></li>
+
+              <li>
+                <button [routerLink]="logout" class="dropdown-item">
+                  <fa-icon [icon]="faSignOutAlt" size="xs" class="mr-1"></fa-icon>
+                  Salir
+                </button>
+              </li>
+
+            </ul>
+          </button>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mr-auto" *ngIf="!identity">
         <li class="nav-item">
           <a class="nav-link" rel="noopener" [routerLink]="['register']">
             Register
@@ -36,7 +73,7 @@
         <li class="nav-item">
 
           <a class="nav-link" rel="noopener" [routerLink]="['login']">
-            Login
+            Acceder
             <fa-icon [icon]="faUser" size="1x"></fa-icon>
           </a>
         </li>
