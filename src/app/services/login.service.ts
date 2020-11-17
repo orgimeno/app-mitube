@@ -16,24 +16,7 @@ export class LoginService{
   }
 
   signUp(userToLogin){
-    let json = JSON.stringify(userToLogin);
-    let params = "json="+json;
-    let headers = new HttpHeaders({
-      'Content-Type':'application/x-www-form-urlencoded'
-    });
-
-    console.info('*****************************************');
-    console.info('/login');
-    console.info(`json=${ json }`);
-    console.info(`xdebug=${ GLOBAL.xdebug }`);
-    console.info('*****************************************');
-
-    return this._http.post(this.url + '/login', params, {
-      params: new HttpParams().set('XDEBUG_SESSION_START', GLOBAL.xdebug),
-      headers:headers,
-      observe: 'response'
-    })
-      .pipe(map((resp: any) => resp));
+    return this.baseRequest(userToLogin, '/login');
   }
 
   getIdentity(){
@@ -59,5 +42,61 @@ export class LoginService{
 
     return this.token;
   }
+
+  register(userToSign){
+    return this.baseRequest(userToSign, '/user/new');
+  }
+
+
+  updateUSer(usertToUpdate){
+    return this.baseAuthRequest(usertToUpdate, '/user/edit');
+  }
+
+
+
+  baseRequest(obj, endpoint){
+    let json = JSON.stringify(obj, endpoint);
+    let params = "json="+json;
+    let headers = new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded'
+    });
+
+    console.info('*****************************************');
+    console.info(`${endpoint}`);
+    console.info(`json=${ json }`);
+    console.info(`xdebug=${ GLOBAL.xdebug }`);
+    console.info('*****************************************');
+
+    return this._http.post(this.url + endpoint, params, {
+      params: new HttpParams().set('XDEBUG_SESSION_START', GLOBAL.xdebug),
+      headers:headers,
+      observe: 'response'
+    })
+      .pipe(map((resp: any) => resp));
+  }
+
+  baseAuthRequest(obj, endpoint){
+    let json = JSON.stringify(obj, endpoint);
+    let params = "json="+json+"&authorization="+this.getToken();
+    let headers = new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded'
+    });
+
+    console.info('*****************************************');
+    console.info(`${endpoint}`);
+    console.info(`json=${ json }`);
+    console.info(`xdebug=${ GLOBAL.xdebug }`);
+    console.info('*****************************************');
+    console.info(`auth=${ this.getToken() }`);
+    console.info('*****************************************');
+
+    return this._http.post(this.url + endpoint, params, {
+      params: new HttpParams().set('XDEBUG_SESSION_START', GLOBAL.xdebug),
+      headers:headers,
+      observe: 'response'
+    })
+      .pipe(map((resp: any) => resp));
+  }
+
 
 }

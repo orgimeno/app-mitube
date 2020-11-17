@@ -1,3 +1,79 @@
-<p>
-  register works!
-</p>
+<div class="col-6">
+  <div class="card">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="card-header">
+        <h3>{{title}}</h3>
+      </div>
+      <div class="card-body">
+
+        <div class="alert alert-success" role="alert" *ngIf="status === 'success'">
+          <strong>Registrado correctamente, puedes entrar </strong>
+          <a [routerLink]="['/login']" >pinchando aquí...</a>
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="status === 'error'">
+          <strong>No ha sido posible registrarse</strong>
+        </div>
+
+        <div class="form-group">
+          <input id="name"
+                 placeholder="Nombre"
+                 class="form-control"
+                 #name="ngModel"
+                 name="nombre"
+                 [(ngModel)]="user.name"
+                 required
+          >
+          <span class="badge-danger" *ngIf="!name.valid && name.touched">Nombre obligatorio</span>
+        </div>
+
+        <div class="form-group">
+          <input id="surname"
+                 placeholder="Apellidos"
+                 class="form-control"
+                 #surname="ngModel"
+                 name="apellido"
+                 [(ngModel)]="user.surname"
+                 required
+          >
+          <span class="badge-danger" *ngIf="!surname.valid && surname.touched">Apellido obligatorio</span>
+        </div>
+
+        <div class="form-group">
+          <input id="email"
+                 placeholder="E-mail"
+                 type="email"
+                 class="form-control"
+                 #email="ngModel"
+                 name="email"
+                 [(ngModel)]="user.email"
+                 required
+          >
+          <span class="badge-danger" *ngIf="!email.valid && email.touched">Email obligatorio</span>
+        </div>
+
+        <div class="form-group">
+          <input id="password"
+                 placeholder="Password"
+                 type="password"
+                 class="form-control"
+                 #password="ngModel"
+                 name="password"
+                 [(ngModel)]="user.password"
+                 required
+          >
+          <span class="badge-danger" *ngIf="!password.valid && password.touched">Password obligatorio</span>
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <div class="align-content-center">
+          <button class="btn btn-success">{{title}}</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
