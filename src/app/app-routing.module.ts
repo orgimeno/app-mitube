@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent} from './register/register.component';
 import { DefaultComponent } from './default/default.component';
 import {UserEditComponent} from "./user-edit/user-edit.component";
+import {VideoNewComponent} from "./video-new/video-new.component";
 
 const routes: Routes = [
   { path: 'index', component: DefaultComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login/:id', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user/edit', component: UserEditComponent },
+  { path: 'video/new', component: VideoNewComponent },
   { path: '**', component: DefaultComponent }
 ];
 

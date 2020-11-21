@@ -10,6 +10,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { VideoNewComponent } from './video-new/video-new.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     DefaultComponent,
     RegisterComponent,
     LoginComponent,
-    UserEditComponent
+    UserEditComponent,
+    VideoNewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,45 @@
+<div>
+  <form #newVideoForm
+        (ngSubmit)="onSubmit()"
+        class="form">
+    <div class="card">
+      <div class="card-header">
+        <h1>{{title}}</h1>
+      </div>
+      <div class="card-body">
+
+        <div class="form-group">
+          <label for="title">Título:</label>
+          <input type="text" class="form-control" name="title" id="title" aria-describedby="titulo" placeholder="Título"
+                 #videoTitle
+                 [(ngModel)]="video.title">
+          <small id="titulo" class="form-text text-muted">Título del vídeo</small>
+          <span *ngIf="videoTitle.validity && videoTitle.ontouchend" class="badge-danger">El título no es correcto</span>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción:</label>
+          <textarea type="text" class="form-control" name="description" id="description" aria-describedby="titulo" placeholder="Descripción"
+                 #videoDesc
+                    [(ngModel)]="video.description"></textarea>
+          <small id="desc" class="form-text text-muted">Descripción del vídeo</small>
+          <span *ngIf="videoDesc.validity && videoTitle.ontouchend" class="badge-danger">Descripción erronea</span>
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <select class="form-control" name="estado" id="estado"
+          (change)="callVideosStatus(videoStatus.value)"
+          #videoStatus>
+            <option value="public" [attr.selected]="video.status === 'public' ? 'selected' : null">Público</option>
+            <option value="private" [attr.selected]="video.status === 'private' ? 'selected' : null">Privado</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="card-footer text-muted">
+        <button class="btn btn-success" type="submit">Crear Vídeo</button>
+      </div>
+    </div>
+  </form>
+</div>

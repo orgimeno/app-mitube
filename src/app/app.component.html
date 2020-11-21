@@ -17,7 +17,7 @@
           <a class="nav-link" rel="noopener" [routerLink]="['index']">Home</a>
         </li>
         <li class="nav-item" *ngIf="identity">
-          <a class="nav-link" rel="noopener" [routerLink]="['createVideo']">Crear Video
+          <a class="nav-link" rel="noopener" [routerLink]="['video/new']">Crear Video
             <fa-icon
               [icon]="faVideo"
               [spin]="true"
@@ -26,7 +26,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav mr-auto" *ngIf="identity" id="credentials-top">
-        <li class="dropdown open">
+
+        <li class="dropdown open mt-2">
           <button href="#" class="dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="false"
           aria-haspopup="true">
             <fa-icon [icon]="faIdCard" size="xs" class="mr-1"></fa-icon>
@@ -57,6 +58,12 @@
 
             </ul>
           </button>
+        </li>
+
+        <li class="ml-2">
+          <a [routerLink]="['/index']">
+            <img id="user-image" class="img-thumbnail" alt="perfil" src="http://127.0.0.1:8000/uploads/users/{{identity.image}}" width="60" />
+          </a>
         </li>
       </ul>
 
