@@ -11,6 +11,7 @@ import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { VideoNewComponent } from './video-new/video-new.component';
+import { VideoDetailComponent } from './video-detail/video-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VideoNewComponent } from './video-new/video-new.component';
     RegisterComponent,
     LoginComponent,
     UserEditComponent,
-    VideoNewComponent
+    VideoNewComponent,
+    VideoDetailComponent
   ],
   imports: [
     BrowserModule,
