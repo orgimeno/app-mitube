@@ -26,7 +26,6 @@ export class UploadService{
         formData.append("authorization", token);
 
         xhr.onreadystatechange = function (){
-          ///  SE SUPONE QUE ES == $¿??
           if (xhr.readyState == 4){
             if(xhr.status == 200){
               resolve(JSON.parse(xhr.response))
