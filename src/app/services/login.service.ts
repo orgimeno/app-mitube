@@ -8,7 +8,7 @@ import {GLOBAL} from "./global";
 @Injectable()
 export class LoginService{
 
-  public url = "http://127.0.0.1:8000/app_dev.php";
+  public url = GLOBAL.url;
   public identity;
   public token;
 

@@ -3,6 +3,7 @@ import {LoginService} from "../services/login.service";
 import {User} from "../model/user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UploadService} from "../services/upload.service";
+import {GLOBAL} from "../services/global";
 
 @Component({
   selector: 'app-user-edit',
@@ -76,7 +77,7 @@ export class UserEditComponent implements OnInit {
   fileChangeEvent(fileInput){
     this.filesToUpload = <Array<File>>fileInput.target.files;
     let token = this._loginService.getToken();
-    let url = "http://127.0.0.1:8000/app_dev.php/user/upload-image-user";
+    let url = `${GLOBAL.url}/user/upload-image-user`;
 
     this._uploadService.makeFileRequest(token, url, ['image'], this.filesToUpload)
       .then(

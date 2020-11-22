@@ -1,10 +1,21 @@
 <div>
   <form #newVideoForm
         (ngSubmit)="onSubmit()"
-        class="form">
+        class="form"
+        *ngIf="status != 'success' && uploadedImage == false"
+  >
     <div class="card">
       <div class="card-header">
         <h1>{{title}}</h1>
+
+        <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+          <strong>{{video.title}}</strong> necesita una imagen y un video
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+          <strong>No guardado</strong>
+        </div>
+
       </div>
       <div class="card-body">
 
@@ -42,4 +53,51 @@
       </div>
     </div>
   </form>
+
+  <form
+    *ngIf="status == 'success' && uploadedImage == false">
+    <div class="card">
+      <div class="card-header">
+        <h4>Imagen del video</h4>
+      </div>
+      <div class="card-body">
+        <input type="file" placeholder="Subir imagen..." (change)="fileChangeEventImage($event)">
+      </div>
+      <div class="card-footer text-muted">
+        <div class="progress mt-1">
+          <div id="upload-progress-bar" class="progress-bar progress-bar-success"
+               role="progressbar"
+               aria-valuenow="0"
+               aria-valuemin="0"
+               aria-valuemax="100"></div>
+        </div>
+        <p id="status"></p>
+      </div>
+      <button class="btn btn-primary" (click)="nextUploadVideo()">Continuar</button>
+    </div>
+  </form>
+
+  <form
+    *ngIf="status == 'success' && uploadedImage == true">
+    <div class="card">
+      <div class="card-header">
+        <h4>Sube el Vídeo</h4>
+      </div>
+      <div class="card-body">
+        <input type="file" placeholder="Subir video..." (change)="fileChangeEventVideo($event)">
+      </div>
+      <div class="card-footer text-muted">
+        <div class="progress mt-1">
+          <div id="upload-progress-bar" class="progress-bar progress-bar-success"
+               role="progressbar"
+               aria-valuenow="0"
+               aria-valuemin="0"
+               aria-valuemax="100"></div>
+        </div>
+        <p id="status"></p>
+      </div>
+      <button class="btn btn-primary" (click)="redirectToVideo()">Continuar y ver como ha quedado</button>
+    </div>
+  </form>
+
 </div>
