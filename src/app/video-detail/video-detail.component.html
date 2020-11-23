@@ -1,3 +1,41 @@
-<p>
-  video-detail works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card" *ngIf="video">
+      <div class="card-header">
+        <h3>{{video.title}}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <video controls id="video-player">
+              <source src="{{urlUploads}}video_{{video.id}}/{{video.videoPath}}">
+              Tu navegador no es compatible con HTML5
+            </video>
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <div class="card-header">
+                <h4>Detalles</h4>
+                {{video | json}}
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Descripción</h4>
+                <p class="card-text">{{video.description}}</p>
+                <h4 class="card-title">Subido por</h4>
+                <p class="card-text">{{video.user.name}} {{video.user.surname}}</p>
+              </div>
+              <div class="card-footer text-muted">
+                Subido el día {{video.createdAt | date}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader" *ngIf="loading == 'show'">
+      <img src="assets/images/ajax_loader_red.gif" width="10%"/>
+    </div>
+
+  </div>
+</div>

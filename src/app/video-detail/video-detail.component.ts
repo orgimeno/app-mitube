@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../services/login.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {VideoService} from "../video.service";
+import {GLOBAL} from "../services/global";
 
 @Component({
   selector: 'app-video-detail',
@@ -7,9 +11,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoDetailComponent implements OnInit {
 
-  constructor() { }
+  public title: string = 'Detalle del Vídeo';
+  public id: number;
+  private errorMsg: any;
+  public video;
+  public loading = 'show';
+  public urlUploads = GLOBAL.urlUploads;
+
+  constructor(
+    private _loginService : LoginService,
+    private _videoService : VideoService,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
+    this.id = +this._route.snapshot.url[1].path;
+    this._videoService.getVideo(this.id).subscribe(
+      resp=>{
+        if(resp.status == 'success'){
+          this.video = resp.data;
+
+        }else{
+          this._router.navigate(['/index']);
+        }
+        this.loading = 'hidde';
+      },
+      error => {
+        this.errorMsg = <any>error
+
+        if (this.errorMsg != null) {
+
+          console.log(this.errorMsg);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  getVideo(){
+    this._loginService.baseAuthRequest('', '/video/detail/' + this.id).subscribe(
+      resp=>{
+        console.log(resp);
+      },
+      error => {
+        this.errorMsg = <any>error
+
+        if (this.errorMsg != null) {
+
+          console.log(this.errorMsg);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
 }
