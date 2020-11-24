@@ -17,6 +17,8 @@ export class VideoDetailComponent implements OnInit {
   public video;
   public loading = 'show';
   public urlUploads = GLOBAL.urlUploads;
+  lastVideos: any;
+  private statusLastVideos: any;
 
   constructor(
     private _loginService : LoginService,
@@ -26,6 +28,7 @@ export class VideoDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = 'show';
     this.id = +this._route.snapshot.url[1].path;
     this._videoService.getVideo(this.id).subscribe(
       resp=>{
@@ -46,6 +49,29 @@ export class VideoDetailComponent implements OnInit {
         }
       }
     );
+
+    this._videoService.getLastVideos().subscribe(
+      resp=>{
+        console.log(resp);
+        this.lastVideos = resp['data'];
+        this.statusLastVideos = resp['status'];
+
+        if(this.statusLastVideos !== 'success'){
+          this._router.navigate(['/index']);
+        }
+
+      },
+      error => {
+        this.errorMsg = <any>error
+
+        if (this.errorMsg != null) {
+
+          console.log(this.errorMsg);
+          alert("Error en la petición");
+        }
+      }
+    );
+
   }k
 
 }

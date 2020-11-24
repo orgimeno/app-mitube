@@ -14,11 +14,10 @@ export class VideoService {
   constructor(private _http: HttpClient) { }
 
   getVideo(id){
-
-
     return this._http.get(this.url + '/video/detail/' + id + '?XDEBU_SESSION_START=' + GLOBAL.xdebug);
-    /*this._http.get(this.url + '/video/detail/' + id).subscribe(res => {
-      console.log(res);
-    });*/
+  }
+
+  getLastVideos(){
+    return this._http.get(this.url + '/video/last-videos?XDEBU_SESSION_START=' + GLOBAL.xdebug);
   }
 }
