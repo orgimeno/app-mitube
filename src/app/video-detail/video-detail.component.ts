@@ -29,9 +29,8 @@ export class VideoDetailComponent implements OnInit {
     this.id = +this._route.snapshot.url[1].path;
     this._videoService.getVideo(this.id).subscribe(
       resp=>{
-        if(resp.status == 'success'){
-          this.video = resp.data;
-
+        if(resp['status'] == 'success'){
+          this.video = resp['data'];
         }else{
           this._router.navigate(['/index']);
         }
@@ -47,23 +46,6 @@ export class VideoDetailComponent implements OnInit {
         }
       }
     );
-  }
-
-  getVideo(){
-    this._loginService.baseAuthRequest('', '/video/detail/' + this.id).subscribe(
-      resp=>{
-        console.log(resp);
-      },
-      error => {
-        this.errorMsg = <any>error
-
-        if (this.errorMsg != null) {
-
-          console.log(this.errorMsg);
-          alert("Error en la petición");
-        }
-      }
-    );
-  }
+  }k
 
 }
