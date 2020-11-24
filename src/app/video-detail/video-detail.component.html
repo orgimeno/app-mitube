@@ -5,12 +5,17 @@
         <h3>{{video.title}}</h3>
       </div>
       <div class="card-body">
+
         <div class="row">
           <div class="col-6">
-            <video controls id="video-player">
-              <source src="{{urlUploads}}video_{{video.id}}/{{video.videoPath}}">
-              Tu navegador no es compatible con HTML5
-            </video>
+            <div class="card">
+              <div class="card-body">
+                <video controls id="video-player">
+                  <source src="{{urlUploads}}video_files/video_{{video.id}}/{{video.videoPath}}">
+                  Tu navegador no es compatible con HTML5
+                </video>
+              </div>
+            </div>
           </div>
           <div class="col-6">
             <div class="card">

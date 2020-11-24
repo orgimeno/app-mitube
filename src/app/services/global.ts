@@ -1,5 +1,5 @@
 export let GLOBAL = {
   xdebug: '',
   url: 'http://127.0.0.1:8000/app_dev.php',
-  urlUploads: 'http://127.0.0.1:8000/uploads/video_files/'
+  urlUploads: 'http://127.0.0.1:8000/uploads/'
 };
