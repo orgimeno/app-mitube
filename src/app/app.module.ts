@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { VideoNewComponent } from './video-new/video-new.component';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
+import { LastVideosComponent } from './last-videos/last-videos.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
     LoginComponent,
     UserEditComponent,
     VideoNewComponent,
-    VideoDetailComponent
+    VideoDetailComponent,
+    LastVideosComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

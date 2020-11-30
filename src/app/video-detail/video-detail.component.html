@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <div class="card" *ngIf="video">
+    <div class="card" *ngIf="video && loading == 'hidde'">
       <div class="card-header">
         <h3>{{video.title}}</h3>
       </div>
@@ -17,38 +17,35 @@
               </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="card">
-              <div class="card-header">
-                <h4>Detalles</h4>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Detalles</h4>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title">Descripción</h4>
+                    <p class="card-text">{{video.description}}</p>
+                    <h4 class="card-title">Subido por</h4>
+                    <p class="card-text">{{video.user.name}} {{video.user.surname}}</p>
+                  </div>
+                  <div class="card-footer text-muted">
+                    Creado el día {{video.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}
+                  </div>
+                </div>
               </div>
-              <div class="card-body">
-                <h4 class="card-title">Descripción</h4>
-                <p class="card-text">{{video.description}}</p>
-                <h4 class="card-title">Subido por</h4>
-                <p class="card-text">{{video.user.name}} {{video.user.surname}}</p>
-              </div>
-              <div class="card-footer text-muted">
-                Creado el día {{video.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}
+              <div class="col-6">
+                <app-last-videos></app-last-videos>
               </div>
             </div>
-          </div>
-          <div class="col-3">
-            <div class="card text-left">
-              <div class="card-body">
-                <ul id="videos-list" *ngIf="lastVideos">
-                  <li *ngFor="let lastVideo of lastVideos" class="last-video-item pull-left row">
-                    <div class="last-video-image-thumb col.4 pull-left">
-                      <img src="{{urlUploads}}/video_images/video_{{lastVideo.id}}/{{lastVideo.image}}" *ngIf="lastVideo.image">
-                    </div>
-
-                    <div class="data col-8 pull-left">
-                      <h5><a [routerLink]="['/video', lastVideo.id]" >{{lastVideo.title}}</a></h5>
-                      <a [routerLink]="['/video', lastVideo.id]" >{{lastVideo.user.name}}</a>
-                    </div>
-
-                  </li>
-                </ul>
+            <div class="row">
+              <div class="col-12">
+                <div class="card border-light">
+                  <div class="card-body">
+                    <app-comments *ngIf="identity"></app-comments>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

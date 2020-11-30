@@ -1,0 +1,18 @@
+<div class="card text-left">
+  <div class="card-body">
+    <ul id="videos-list" *ngIf="lastVideos">
+      <li *ngFor="let lastVideo of lastVideos" class="last-video-item pull-left row">
+        <div class="last-video-image-thumb col.4 pull-left">
+          <img src="{{urlUploads}}/video_images/video_{{lastVideo.id}}/{{lastVideo.image}}" *ngIf="lastVideo.image">
+        </div>
+
+        <div class="data col-8 pull-left">
+<!--          <h5><a href="/video/{{lastVideo.id}}">{{lastVideo.title}}</a></h5>-->
+          <h5><a [routerLink]="['/video', lastVideo.id]" >{{lastVideo.title}}</a></h5>
+          <a href="/chanel/{{lastVideo.user.id}}" >{{lastVideo.user.name}}</a>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+</div>

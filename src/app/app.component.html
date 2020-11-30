@@ -20,7 +20,7 @@
           <a class="nav-link" rel="noopener" [routerLink]="['video/new']">Crear Video
             <fa-icon
               [icon]="faVideo"
-              [spin]="true"
+              [spin]="isSyncAnimated"
             ></fa-icon>
           </a>
         </li>
@@ -88,5 +88,11 @@
   <main class="mt-3">
     <router-outlet></router-outlet>
   </main>
+  <footer>
+    <hr/>
+    App desarrollada por Oscar Rodríguez <fa-icon [icon]="faDesk" [spin]="isSyncAnimated" size="1x"></fa-icon>
+    <hr/>
+    <fa-icon [icon]="faSync" [spin]="isSyncAnimated" (click)="isSyncAnimated=!isSyncAnimated"></fa-icon>
+  </footer>
 
 </div>

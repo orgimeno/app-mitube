@@ -1,0 +1,48 @@
+<h4>{{title}}</h4>
+
+<form
+  #newComment="ngForm"
+  (ngSubmit)="onSubmit()">
+  <div>
+    <input type="hidden"
+         #video_id
+         [(ngModel)]="comment.video_id"
+         name="video_id"
+         required
+    >
+
+    <textarea class="form-control"
+            #body
+            [(ngModel)]="comment.body"
+            name="body"
+            required
+
+    ></textarea>
+    <span *ngIf="!body.valid && body.touched">
+    rellena el formulario
+    </span>
+  </div>
+  <div class="mt-2">
+
+    <input type="submit"
+           class="btn- btn-success">
+  </div>
+</form>
+
+<div class="clearfix mt-2"></div>
+
+<div id="comment-list" *ngIf="commentList">
+
+  <div class="card border-secondary comment-card-{{comment.id}}">
+    <div class="card-body">
+      <div *ngFor="let comment of commentList" class="comment-list col-12 pull-left">
+
+          <div class="card-text">{{comment.body}}</div>
+          <hr/>
+          <p><fa-icon class="mr-2" [icon]="faUser" size="1x"></fa-icon> <small><strong>{{comment.user.name}}</strong> el {{comment.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}</small></p>
+
+      </div>
+    </div>
+  </div>
+
+</div>
