@@ -25,21 +25,26 @@
   <div class="mt-2">
 
     <input type="submit"
-           class="btn- btn-success">
+           class="btn btn-success">
+
+    <div class="loader" *ngIf="loading == 'hide'">
+      <img alt="espera" src="assets/images/ajax_loader_dots.gif">
+    </div>
   </div>
 </form>
 
 <div class="clearfix mt-2"></div>
 
-<div id="comment-list" *ngIf="commentList">
+
+<div id="comment-list" *ngIf="commentList && loading == 'hide'">
 
   <div class="card border-secondary comment-card-{{comment.id}}">
     <div class="card-body">
       <div *ngFor="let comment of commentList" class="comment-list col-12 pull-left">
 
           <div class="card-text">{{comment.body}}</div>
-          <hr/>
-          <p><fa-icon class="mr-2" [icon]="faUser" size="1x"></fa-icon> <small><strong>{{comment.user.name}}</strong> el {{comment.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}</small></p>
+          <div><fa-icon class="mr-2" [icon]="faUser" size="1x"></fa-icon> <small><strong>{{comment.user.name}}</strong> el {{comment.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}</small></div>
+        <hr/>
 
       </div>
     </div>

@@ -22,7 +22,6 @@ export class LastVideosComponent implements OnInit {
   ngOnInit() {
     this._videoService.getLastVideos().subscribe(
       resp=>{
-        console.log(resp);
         this.lastVideos = resp['data'];
         this.statusLastVideos = resp['status'];
 

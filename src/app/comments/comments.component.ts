@@ -22,6 +22,7 @@ export class CommentsComponent implements OnInit {
   private status: any;
   public commentList = [];
   faUser = faUser;
+  loading: string = 'hide';
 
   constructor(
     private _loginService: LoginService,
@@ -51,10 +52,11 @@ export class CommentsComponent implements OnInit {
   onSubmit(){
 
     if (this.comment.body != ''){
+      this.loading = 'show';
       this._loginService.baseAuthRequest(this.comment, '/comment/new').subscribe(
         resp=>{
-          console.log(this.commentList);
           this.status = resp.body.status;
+          this.loading = 'hide';
           if(this.status !== 'success'){
             this.status = 'error';
           }else{
