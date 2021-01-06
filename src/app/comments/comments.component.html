@@ -38,12 +38,15 @@
 
 <div id="comment-list" *ngIf="commentList && loading == 'hide'">
 
-  <div class="card border-secondary comment-card-{{comment.id}}">
+  <div class="card border-secondary">
     <div class="card-body">
-      <div *ngFor="let comment of commentList" class="comment-list col-12 pull-left">
+      <div *ngFor="let comment of commentList" class="comment-list col-12 pull-left comment-card-{{comment.id}}">
 
-          <div class="card-text">{{comment.body}}</div>
-          <div><fa-icon class="mr-2" [icon]="faUser" size="1x"></fa-icon> <small><strong>{{comment.user.name}}</strong> el {{comment.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}</small></div>
+        <div class="card-text">{{comment.body}}</div>
+        <div class="row">
+          <div class="col-10"><fa-icon class="mr-2" [icon]="faUser" size="1x"></fa-icon> <small><strong>{{comment.user.name}}</strong> el {{comment.createdAt.timestamp * 1000 | date:'dd-MM-yyyy'}}</small></div>
+          <div *ngIf="comment.user.id === identity.sub || comment.video.user.id === identity.sub " class="col-2"><fa-icon class="mr-2 pointer" [icon]="faTrash" size="1x"(click)="deleteComment(comment.id)" ></fa-icon></div>
+        </div>
         <hr/>
 
       </div>

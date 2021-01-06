@@ -4,7 +4,8 @@ import {VideoService} from "../video.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommentService} from "../comment.service";
 import {
-  faUser
+  faUser,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 @Component({
   selector: 'app-comments',
@@ -22,6 +23,7 @@ export class CommentsComponent implements OnInit {
   private status: any;
   public commentList = [];
   faUser = faUser;
+  faTrash = faTrash;
   loading: string = 'hide';
 
   constructor(
@@ -44,8 +46,6 @@ export class CommentsComponent implements OnInit {
     }
 
     this.getComments(this.id);
-
-    console.log(this.commentList);
 
   }
 
@@ -101,6 +101,33 @@ export class CommentsComponent implements OnInit {
       }
     )
 
+  }
+
+  deleteComment(comment_id){
+    let commentCard = <HTMLElement>document.querySelector(".comment-card-" + comment_id);
+    if(commentCard != null) {
+      commentCard.style.display = "none";
+      this._loginService.baseAuthRequest({id:comment_id}, '/comment/delete/' + comment_id)
+        .subscribe(
+          resp => {
+            this.status = resp['status'];
+            if(this.status !== 'success'){
+              this.status = 'Error';
+            }else{
+              this.loading = 'hide';
+            }
+          },
+          error => {
+            this.errorMsg = <any>error
+
+            if (this.errorMsg != null) {
+
+              console.log(this.errorMsg);
+              alert("Error en la petición");
+            }
+          }
+        )
+    }
   }
 
 }
