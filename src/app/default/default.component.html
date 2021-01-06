@@ -1,6 +1,5 @@
-<div class="row">
-
-  <div class="col-4">
+<div class="row mb-4">
+  <div class="col-6">
     <div class="card border-info">
       <div class="card-body">
         <h4 class="card-title">{{title}}</h4>
@@ -9,7 +8,28 @@
       </div>
     </div>
   </div>
-  <div class="col-4"></div>
+</div>
+<div class="row">
+
+  <div class="col-8">
+    <div class="all-videos">
+      <ul id="videos-list" *ngIf="videos" class="m-0 row">
+        <li *ngFor="let video of videos" class="video-item col-4 pull-left mb-2">
+          <div class="video-image-thumb">
+            <img src="{{urlUploads}}video_images/video_{{video.id}}/{{video.image}}" *ngIf="video.image" alt="imagen del videos"/>
+          </div>
+          <div class="data">
+            <h4><a [routerLink]="['/video', video.id]">{{video.title}}</a></h4>
+            <p>Subido por: <a [routerLink]="['index']">{{video.user.name}} {{video.user.surname}}</a></p>
+          </div>
+          <div class="video-button" *ngIf="identity && identity.sub == video.user.id">
+            <fa-icon></fa-icon>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
   <div class="col-4">
     <app-last-videos></app-last-videos>
   </div>

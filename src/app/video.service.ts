@@ -20,4 +20,13 @@ export class VideoService {
   getLastVideos(){
     return this._http.get(this.url + '/video/last-videos?XDEBU_SESSION_START=' + GLOBAL.xdebug);
   }
+
+  getVideos(page = null) {
+    if(page != null){
+      page = 1;
+    }
+
+    return this._http.get(this.url + '/video/list?page=' + page + '&XDEBU_SESSION_START=' + GLOBAL.xdebug);
+  }
+
 }
