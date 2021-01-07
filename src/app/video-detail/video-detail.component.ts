@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../services/login.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {VideoService} from "../video.service";
 import {GLOBAL} from "../services/global";
 
@@ -19,14 +19,21 @@ export class VideoDetailComponent implements OnInit {
   public urlUploads = GLOBAL.urlUploads;
   lastVideos: any;
   private statusLastVideos: any;
-  private identity: any;
+  identity: any;
 
   constructor(
     private _loginService : LoginService,
     private _videoService : VideoService,
     private _route: ActivatedRoute,
     private _router: Router
-  ) { }
+  ) {
+    this._router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit() {
     this.loading = 'show';

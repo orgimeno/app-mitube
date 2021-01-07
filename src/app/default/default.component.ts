@@ -34,8 +34,16 @@ export class DefaultComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _videoService: VideoService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit() {
     this.identity = this._loginService.getIdentity();
