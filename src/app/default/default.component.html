@@ -11,10 +11,15 @@
 </div>
 <div class="row">
 
-  <div class="col-8">
+  <div class="col-10">
     <div class="all-videos">
-      <ul id="videos-list" *ngIf="videos" class="m-0 row">
-        <li *ngFor="let video of videos" class="video-item col-4 pull-left mb-2">
+
+      <div class="loader" *ngIf="loading == 'show'">
+        <img src="assets/images/ajax_loader_gray.gif" alt="loader" class="w-25">
+      </div>
+
+      <ul id="videos-list" *ngIf="videos && loading == 'hide'" class="m-0 row">
+        <li *ngFor="let video of videos" class="video-item pull-left mb-4 mr-4">
           <div class="video-image-thumb">
             <img src="{{urlUploads}}video_images/video_{{video.id}}/{{video.image}}" *ngIf="video.image" alt="imagen del videos"/>
           </div>
@@ -23,14 +28,30 @@
             <p>Subido por: <a [routerLink]="['index']">{{video.user.name}} {{video.user.surname}}</a></p>
           </div>
           <div class="video-button" *ngIf="identity && identity.sub == video.user.id">
-            <fa-icon></fa-icon>
+            <a class="btn btn-primary" [routerLink]="['/index']">
+              <fa-icon class="pointer" [icon]="faEdit" size="1x" (click)="editVideo(video.id)" ></fa-icon>
+            </a>
           </div>
         </li>
 
       </ul>
     </div>
+
+    <ul class="pagination">
+      <li>
+        <a [routerLink]="['/index', pagePrev]" class="btn btn-info btn-outline-light rounded-circle" aria-label="Previous">
+          <fa-icon class="pointer" [icon]="faPrev" size="1x" ></fa-icon>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/index', pageNext]" class="btn btn-info btn-outline-light rounded-circle" aria-label="Next">
+          <fa-icon class="pointer" [icon]="faNext" size="1x" ></fa-icon>
+        </a>
+      </li>
+    </ul>
+
   </div>
-  <div class="col-4">
+  <div class="col-2">
     <app-last-videos></app-last-videos>
   </div>
 

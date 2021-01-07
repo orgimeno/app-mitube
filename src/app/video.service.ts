@@ -22,7 +22,7 @@ export class VideoService {
   }
 
   getVideos(page = null) {
-    if(page != null){
+    if(page === null){
       page = 1;
     }
 

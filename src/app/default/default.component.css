@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.video-item .data {
+.video-item {
   border: 1px solid #DDDDDD;
   border-radius: 0 0 5px 5px;
   padding: 10px;
