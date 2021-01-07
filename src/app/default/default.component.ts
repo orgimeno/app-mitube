@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../services/login.service";
 import {VideoService} from "../video.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {GLOBAL} from "../services/global";
+import {
+  faEdit,
+  faAngleLeft,
+  faAngleRight
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-default',
@@ -18,6 +23,13 @@ export class DefaultComponent implements OnInit {
   private status: string;
   public videos;
   urlUploads: string;
+  faEdit = faEdit;
+  faPrev = faAngleLeft;
+  faNext = faAngleRight
+  loading;
+  pages;
+  pagePrev = 1;
+  pageNext = 1;
 
   constructor(
     private _loginService: LoginService,
@@ -29,39 +41,67 @@ export class DefaultComponent implements OnInit {
     this.identity = this._loginService.getIdentity();
     this.getAllVideos();
     this.urlUploads = GLOBAL.urlUploads;
+    this.loading = 'show';
 
   }
 
 
   getAllVideos() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      let page = +params['page'];
-      if(!page) {
-        page = 1;
+
+    let page = 1;
+
+    if (this.activatedRoute.snapshot.url.length ){
+      if(this.activatedRoute.snapshot.url[0].path == 'index'){
+        page = this.activatedRoute.snapshot.url.length == 2 ? +this.activatedRoute.snapshot.url[1].path : 1;
+      }else{
+        page = +this.activatedRoute.snapshot.url[0].path;
       }
+    }
 
-      this._videoService.getVideos(page).subscribe(
-        resp => {
+    this._videoService.getVideos(page).subscribe(
+      resp => {
+        console.log(resp);
+        this.status = resp['status'];
+        if (this.status !== 'success'){
+          this.status = 'error';
+        }else{
+          this.videos = resp['data'];
+          this.loading = 'hide';
 
-          this.status = resp['status'];
-          if (this.status !== 'success'){
-            this.status = 'error';
+          this.pages = [];
+
+          for(let i = 0; i < resp['total_pages']; i++){
+            this.pages.push(i);
+          }
+
+          if(page >= 2){
+            this.pagePrev = (page -1);
           }else{
-            this.videos = resp['data'];
+            this.pagePrev = page;
           }
 
-        },
-        error => {
-          this.errorMsg = <any>error
-
-          if (this.errorMsg != null) {
-
-            console.log(this.errorMsg);
-            alert("Error en la petición");
+          if(page < resp['total_pages'] || page == 1){
+            this.pageNext = (page + 1)
+          }else{
+             this.pageNext = page;
           }
+
         }
-      );
 
-    });
+      },
+      error => {
+        this.errorMsg = <any>error
+
+        if (this.errorMsg != null) {
+
+          console.log(this.errorMsg);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
+  editVideo(id: number) {
+    console.log(id);
   }
 }
