@@ -43,6 +43,9 @@
           <fa-icon class="pointer" [icon]="faPrev" size="1x" ></fa-icon>
         </a>
       </li>
+      <li *ngFor="let page of pages">
+        <a [routerLink]="['/index', page]" class="btn btn-info btn-outline-light rounded-circle" >{{page}}</a>
+      </li>
       <li>
         <a [routerLink]="['/index', pageNext]" class="btn btn-info btn-outline-light rounded-circle" aria-label="Next">
           <fa-icon class="pointer" [icon]="faNext" size="1x" ></fa-icon>

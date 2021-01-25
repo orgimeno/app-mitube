@@ -68,7 +68,6 @@ export class DefaultComponent implements OnInit {
 
     this._videoService.getVideos(page).subscribe(
       resp => {
-        console.log(resp);
         this.status = resp['status'];
         if (this.status !== 'success'){
           this.status = 'error';
@@ -78,7 +77,7 @@ export class DefaultComponent implements OnInit {
 
           this.pages = [];
 
-          for(let i = 0; i < resp['total_pages']; i++){
+          for(let i = 1; i <= resp['total_pages']; i++){
             this.pages.push(i);
           }
 
